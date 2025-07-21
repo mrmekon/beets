@@ -884,11 +884,11 @@ class ConfigTest(TestPluginTestCase):
 
     def test_paths_section_respected(self):
         with self.write_config_file() as config:
-            config.write("paths: {x: y}")
+            config.write("paths: {y: y}")
 
         self.run_command("test", lib=None)
         key, template = self.test_cmd.lib.path_formats[0]
-        assert key == "x"
+        assert key == "y"
         assert template.original == "y"
 
     def test_default_paths_preserved(self):
@@ -896,10 +896,10 @@ class ConfigTest(TestPluginTestCase):
 
         self._reset_config()
         with self.write_config_file() as config:
-            config.write("paths: {x: y}")
+            config.write("paths: {y: y}")
         self.run_command("test", lib=None)
         key, template = self.test_cmd.lib.path_formats[0]
-        assert key == "x"
+        assert key == "y"
         assert template.original == "y"
         assert self.test_cmd.lib.path_formats[1:] == default_formats
 
